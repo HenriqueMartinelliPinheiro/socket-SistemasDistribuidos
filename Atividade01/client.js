@@ -15,7 +15,7 @@ nomeArquivo = urlParts[4];
 
 const cliente = net.createConnection({
   host: ip,
-  port: 8088
+  port: porta
 });
 
 cliente.write(nomeArquivo);
