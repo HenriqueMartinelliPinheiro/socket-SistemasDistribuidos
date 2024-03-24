@@ -2,18 +2,22 @@ const net = require('net');
 const fs = require('fs');
 const path = require('path');
 
-//servidor
-const HOST = '127.0.0.1';
-const PORT = 8088;
-
 const PASTA_ARQUIVOS = 'arquivos';
+let ip;
+let porta;
+let nomeArquivo;
+const url = "http://127.0.0.1/8088/teste.html"
+const urlParts = url.split('/');
+
+ip = urlParts[2].split(':')[0];
+porta = urlParts[3];
+nomeArquivo = urlParts[4];
 
 const cliente = net.createConnection({
-  host: HOST,
-  port: PORT
+  host: ip,
+  port: 8088
 });
 
-const nomeArquivo = 'teste.html';
 cliente.write(nomeArquivo);
 
 // tamanhoArquivo
