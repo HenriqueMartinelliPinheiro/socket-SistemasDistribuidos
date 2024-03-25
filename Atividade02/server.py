@@ -3,6 +3,7 @@ import socket
 # Configurações do servidor
 HOST = '127.0.0.1'
 PORT = 12345
+total_questoes = 2
 
 # Lista de questões com suas alternativas e respostas corretas
 questions = [
@@ -15,8 +16,29 @@ questions = [
         'question': 'Quem escreveu "Dom Quixote"?',
         'options': ['A) Miguel de Cervantes', 'B) William Shakespeare', 'C) Machado de Assis', 'D) Franz Kafka'],
         'answer': 'A'
+    },
+    {
+        'question': 'Quem pintou a Mona Lisa?',
+        'options': ['A) Leonardo da Vinci', 'B) Pablo Picasso', 'C) Vincent van Gogh', 'D) Michelangelo'],
+        'answer': 'A'
+    },
+    {
+        'question': 'Qual é o maior planeta do sistema solar?',
+        'options': ['A) Terra', 'B) Júpiter', 'C) Saturno', 'D) Marte'],
+        'answer': 'B'
+    },
+    {
+        'question': 'Quem foi o primeiro presidente dos Estados Unidos?',
+        'options': ['A) Abraham Lincoln', 'B) George Washington', 'C) Thomas Jefferson', 'D) John F. Kennedy'],
+        'answer': 'B'
+    },
+    {
+        'question': 'Qual é a montanha mais alta do mundo?',
+        'options': ['A) Monte Everest', 'B) Monte Kilimanjaro', 'C) Monte Fuji', 'D) Monte McKinley'],
+        'answer': 'A'
     }
 ]
+
 
 # Função para enviar questões ao cliente
 def send_question(client_socket, question):
@@ -38,6 +60,9 @@ client_socket, addr = server_socket.accept()
 print('Conexão estabelecida com', addr)
 
 # Enviando e verificando respostas
+
+client_socket.sendall(str(len(questions)).encode())
+
 correct_answers = 0
 for question in questions:
     send_question(client_socket, question)
