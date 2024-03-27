@@ -6,12 +6,11 @@ const PASTA_ARQUIVOS = 'arquivos';
 let ip;
 let porta;
 let nomeArquivo;
-const url = "http://127.0.0.1/8088/teste.html"
+const url = "http://127.0.0.1:8088/teste.html"
 const urlParts = url.split('/');
-
 ip = urlParts[2].split(':')[0];
-porta = urlParts[3];
-nomeArquivo = urlParts[4];
+porta = urlParts[2].split(':')[1];
+nomeArquivo = urlParts[3];
 
 const cliente = net.createConnection({
   host: ip,
