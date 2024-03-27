@@ -1,11 +1,8 @@
 import socket
 
-# Configurações do servidor
 HOST = '127.0.0.1'
-PORT = 12345
-total_questoes = 2
+PORT = 8080
 
-# Lista de questões com suas alternativas e respostas corretas
 questions = [
     {
         'question': 'Qual é a capital do Brasil?',
@@ -40,7 +37,6 @@ questions = [
 ]
 
 
-# Função para enviar questões ao cliente
 def send_question(client_socket, question):
     client_socket.send(question['question'].encode())
     client_socket.send('\n'.encode())
@@ -48,25 +44,21 @@ def send_question(client_socket, question):
         client_socket.send(option.encode())
         client_socket.send('\n'.encode())
 
-# Criação do socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((HOST, PORT))
 server_socket.listen()
 
 print('Aguardando conexão...')
 
-# Aceita conexão do cliente
 client_socket, addr = server_socket.accept()
 print('Conexão estabelecida com', addr)
-
-# Enviando e verificando respostas
 
 client_socket.sendall(str(len(questions)).encode())
 
 correct_answers = 0
 for question in questions:
     send_question(client_socket, question)
-    answer = client_socket.recv(1024).decode().strip()
+    answer = client_socket.recv(1024).decode()
     if answer == question['answer']:
         correct_answers += 1
 
