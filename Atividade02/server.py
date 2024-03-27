@@ -38,11 +38,14 @@ questions = [
 
 
 def send_question(client_socket, question):
-    client_socket.send(question['question'].encode())
-    client_socket.send('\n'.encode())
+  #client_socket.send(question['question'].encode())
+   # client_socket.send('\n'.encode())
+    result =  f'{question['question']}\n'
     for option in question['options']:
-        client_socket.send(option.encode())
-        client_socket.send('\n'.encode())
+        result = f'{result} {option}\n'
+        
+    client_socket.send(result.encode())
+    client_socket.send('\n'.encode())
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((HOST, PORT))
