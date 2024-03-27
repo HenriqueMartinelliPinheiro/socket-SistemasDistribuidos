@@ -11,7 +11,7 @@ print("Serão feitas ",total_questoes," perguntas.")
 
 for i in range(total_questoes):
     question = client_socket.recv(2048).decode()
-    print(question)
+    print(question.replace("/",""))
     print("Digite a resposta: ")
     answer = input()
     client_socket.send(answer.encode())
